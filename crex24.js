@@ -107,15 +107,15 @@ class Crex24Market {
       * @property {string} nbaseCurrency Base currency of the instrument
       * @property {string} quoteCurrency Quote currency of the instrument
       * @property {string} feeCurrency Currency in which the fee is charged (rebate is paid), when trading the instrument
-      * @property {string} tickSize The minimum price movement of the instrument (the smallest price increment of an order placed for the instrument)
-      * @property {string} minPrice Minimum price of an order placed for the instrument
-      * @property {string} minVolume Minimum volume of an order placed for the instrument
-      * @property {"limit"|"market"|"stopLimit"} supportedOrderTypes Array of order types supported by the instrument. May contain the following items:
+      * @property {number} tickSize The minimum price movement of the instrument (the smallest price increment of an order placed for the instrument)
+      * @property {number} minPrice Minimum price of an order placed for the instrument
+      * @property {number} minVolume Minimum volume of an order placed for the instrument
+      * @property {Array<"limit"|"market"|"stopLimit">} supportedOrderTypes Array of order types supported by the instrument. May contain the following items:
       *  "limit" - limit order;
       *  "market" - market order;
       *  "stopLimit" - stop-limit order.
       *  More about order types in the corresponding section of documentation: https://docs.crex24.com/trade-api/v2/#order-types
-      * @property {string} state Instrument state, can have one of the following values:
+      * @property {"active"|"suspended"|delisted"} state Instrument state, can have one of the following values:
       *  "active" - working in a normal mode;
       *  "suspended" - trading is suspended;
       *  "delisted" - instrument is delisted
@@ -139,7 +139,7 @@ class Crex24Market {
       * @typedef {object} Crex24MarketRecentTrades
       * @property {number} price Price for which the base currency was bought or sold
       * @property {number} volume Trade volume (the amount of base currency that was bought or sold)
-      * @property {string} side Trade direction, can have either of the two values: "buy" or "sell"
+      * @property {"buy"|"sell"} side Trade direction, can have either of the two values: "buy" or "sell"
       * @property {string} timestamp Date and time when the trade took place
     */
     /**
@@ -276,7 +276,7 @@ class Crex24Trading {
      */
     /**
       * @typedef {object} Crex24TradingTradeHistory
-      * @property {number} id Unique* trade identifier
+      * @property {number} id Unique trade identifier
       * @property {number} orderId Identifier of the order that generated the trade
       * @property {string} timestamp Date and time when the trade took place
       * @property {string} instrument Trade instrument identifier
@@ -288,7 +288,7 @@ class Crex24Trading {
      */
     /**
       * @typedef {object} Crex24TradingTradeFee
-      * @property {number} makerFeeRate	Relative size of market-maker fee, e.g. the value 0.001 stands for a fee that amounts to 0.1% of the trade value (negative value means rebate)
+      * @property {number} makerFeeRate Relative size of market-maker fee, e.g. the value 0.001 stands for a fee that amounts to 0.1% of the trade value (negative value means rebate)
       * @property {number} takerFeeRate Relative size of market-taker fee, e.g. the value 0.001 stands for a fee that amounts to 0.1% of the trade value
       * @property {number} tradeVolume Total volume of trades that took place over the last 30 days, expressed in BTC
       * @property {string} lastUpdate Date and time when the values of trade fees and trailing 30-day volume were last updated
@@ -461,7 +461,7 @@ class Crex24Account {
     /**
       * @typedef {object} Crex24AccountMoneyTransfers
       * @property {number} id Unique identifier of money transfer
-      * @property {string} type Type of money transfer, can have either of the two values: "deposit" or "withdrawal"
+      * @property {"deposit"|"withdrawal"} type Type of money transfer, can have either of the two values: "deposit" or "withdrawal"
       * @property {string} currency Cryptocurrency identifier
       * @property {string} address Cryptocurrency wallet address
       *  In case of cryptocurrency deposit, this field contains the address of the CREX24 wallet associated with trader’s account.
