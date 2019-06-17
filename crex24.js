@@ -43,7 +43,7 @@ function http_req_log(cr24, method, path, params) {
         let req = new XMLHttpRequest();
         let nonce = Date.now();
         let msg = "/v2/" + path;
-
+        
         if (method === "GET") {
             params = params.filter((x, i) => x !== undefined);
             params = params.length ? "?" + params.reduce((pv, cv, i) => pv + "&" + cv) : "";
@@ -185,7 +185,7 @@ class Crex24Market {
     */
     tickers(instrument) {
         return http_req("public/tickers", [
-            instrument && `instrument=${Array.isArray(instrument) ? instrument.reduce((pv, cv, i) => pv + "," + cv) : instrument}`,
+            instrument && `instrument=${Array.isArray(instrument) ? instrument.reduce((pv, cv, i) => pv + "," + cv) : instrument}`
         ]);
     }
     /** Returns the list of recent trades made with the specified instrument, sorted from newest to oldest
@@ -551,7 +551,7 @@ class Crex24Account {
     }
     /** Returns information about the specified money transfer(s). In order to invoke this method, authentication key must have R3 access permission
     * @param {string} currency - The value of parameter currency that will be specified in the actual withdrawal request
-    * @param {number} amount - The value of parameter currency that will be specified in the actual withdrawal request
+    * @param {number} amount - The value of parameter amount that will be specified in the actual withdrawal request
     * @param {boolean} [includeFee] - The value of parameter includeFee that will be specified in the actual withdrawal request
     * @returns {Promise<Crex24AccountPreviewWithdrawal>} -
     */
